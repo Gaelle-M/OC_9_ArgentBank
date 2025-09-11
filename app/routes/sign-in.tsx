@@ -1,5 +1,7 @@
 import type {Route}
 from "./+types/sign-in";
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import {faUserCircle} from '@fortawesome/free-solid-svg-icons'
 
 export function loader({} : Route.LoaderArgs) {
     return null;
@@ -10,7 +12,7 @@ export default function SignIn() {
         <div className="signin">
             <main className="main bg-dark">
                 <section className="sign-in-content">
-                    <i className="fa fa-user-circle sign-in-icon"></i>
+                    <FontAwesomeIcon icon={faUserCircle}/>
                     <h1>Sign In</h1>
                     <form>
                         <div className="input-wrapper">
@@ -25,13 +27,6 @@ export default function SignIn() {
                             <input type="checkbox" id="remember-me"/>
                             <label htmlFor="remember-me">Remember me</label>
                         </div>
-
-                        <div className="input-wrapper">
-
-                            <input type="checkbox" id="remember-me"/>
-                            <label htmlFor="remember-me">Remember me</label>
-                        </div>
-
                         <button type="submit" className="sign-in-button">
                             Sign In
                         </button>

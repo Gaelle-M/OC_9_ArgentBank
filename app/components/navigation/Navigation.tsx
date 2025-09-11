@@ -1,12 +1,17 @@
-import React from 'react'
-import { Link } from 'react-router'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
- import { faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import { Link } from 'react-router-dom'; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'; 
 
-export const Navigation: React.FC<{}> = () => {
-    return (
-        <div className="navigation">
-            <Link to="/" className="main-nav-logo">
+type NavigationProps = {
+  isLoggedIn: boolean;
+  userName?: string; 
+};
+
+export const Navigation: React.FC<NavigationProps> = ({ isLoggedIn, userName }) => {
+  return (
+    <div className="navigation">
+      <Link to="/" className="main-nav-logo">
         <img
           className="main-nav-logo-image"
           src="./assets/img/argentBankLogo.webp"
@@ -15,11 +20,24 @@ export const Navigation: React.FC<{}> = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        <Link to="/sign-in" className="main-nav-item">
-          <FontAwesomeIcon icon={faUserCircle} />
-          Sign In
-        </Link>
+        {isLoggedIn ? (
+          <>
+            <Link to="/user" className="main-nav-item">
+              <FontAwesomeIcon icon={faUserCircle} />
+              {userName}
+            </Link>
+            <Link to="/" className="main-nav-item">
+              <FontAwesomeIcon icon={faSignOutAlt} /> 
+              Sign Out
+            </Link>
+          </>
+        ) : (
+          <Link to="/sign-in" className="main-nav-item">
+            <FontAwesomeIcon icon={faUserCircle} />
+            Sign In
+          </Link>
+        )}
       </div>
-        </div>
-    )
-}
+    </div>
+  );
+};
