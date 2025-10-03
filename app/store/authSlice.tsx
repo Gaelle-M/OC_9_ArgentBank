@@ -10,6 +10,8 @@ interface AuthState {
     token: string | null;
     user: {
         userName: string;
+        firstName: string;
+        lastName: string;
     };
     error: string | null;
 }
@@ -19,6 +21,8 @@ const initialState: AuthState = {
   token: null,
   user: {
     userName: '',
+    firstName: '',
+    lastName: '',
   },
   error: null,
 };
@@ -35,9 +39,15 @@ const authSlice = createSlice({
       state.error = null;
     },
     // Reducer mise à jour profil
-    setProfile: (state, action: PayloadAction<UserProfilPayload>) => {
-        state.user.userName = action.payload.userName;
-    },
+    setProfile: (state, action) => {
+    state.user.userName = action.payload.userName; 
+    state.user.firstName = action.payload.firstName; 
+    state.user.lastName = action.payload.lastName;   
+},
+
+     updateUserNameInStore: (state, action) => { 
+     state.user.userName = action.payload.userName;
+},
     // Reducer pour la DÉCONNEXION
     signOut: (state) => {
   
@@ -45,10 +55,10 @@ const authSlice = createSlice({
     },
     // Reducer MISE À JOUR du nom
     updateUserName: (state, action) => {
-      state.user.userName = action.payload; 
+      state.user.userName = action.payload.userName; 
     },
   },
 });
 
-export const { signInSuccess, setProfile, signOut } = authSlice.actions; 
+export const { signInSuccess, setProfile, signOut, updateUserName } = authSlice.actions; 
 export default authSlice.reducer;

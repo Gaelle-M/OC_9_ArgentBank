@@ -2,9 +2,11 @@ import React from 'react';
 
 type UserProfileHeaderProps = {
   userName: string;
+  onEditClick: () => void;
 };
 
-export const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ userName }) => {
+
+export const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ userName, onEditClick }) => {
   return (
     <div className="user-profil-header">
       <h1>
@@ -12,7 +14,7 @@ export const UserProfileHeader: React.FC<UserProfileHeaderProps> = ({ userName }
         <br />
         {userName}!
       </h1>
-      <button className="edit-button">Edit Name</button>
+      <button className="edit-button" onClick={onEditClick}>Edit Name</button>
     </div>
   );
 };

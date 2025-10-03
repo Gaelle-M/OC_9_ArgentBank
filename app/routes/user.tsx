@@ -1,17 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { useSelector } from 'react-redux';
 import type { RootState } from '../store/store';
 import { UserProfileHeader } from '../components/UserProfileHeader/UserProfileHeader'; 
 import { Account } from '../components/account/Account'; 
-
+import { EditUserForm } from '../components/EditUserForm/EditUserForm';
 
 
 export default function User() {
   const userName = useSelector((state: RootState) => state.auth.user.userName);
+  const [isEditing, setIsEditing] = useState(false);
+  const handleEditClick = () => {
+    setIsEditing(true);
+  };
+  const handleCancel = () => {
+    setIsEditing(false);
+  };
 
   return (
     <main className="main bg-dark">
-      <UserProfileHeader userName={userName} />
+      {isEditing ? (
+        <EditUserForm onCancel={handleCancel} />
+      ) : (
+        <UserProfileHeader
+          userName={userName}
+          onEditClick={handleEditClick}
+        />
+      )}
       <h2 className="sr-only">Accounts</h2>
       <Account
         title="Argent Bank Checking (x8349)"

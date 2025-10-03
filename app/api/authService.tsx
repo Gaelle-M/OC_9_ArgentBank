@@ -62,3 +62,33 @@ export const getUserProfile = async (token: string) => {
         throw error;
     }
 };
+
+// Endpoint de l'API de mise à jour
+export const updateUserName = async (token: string, newUserName: string) => {
+    const url = `${API_BASE_URL}/user/profile`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'PUT', 
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ userName: newUserName }), 
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Erreur lors de la mise à jour du nom.');
+        }
+
+        const data = await response.json();
+        
+        return {
+            userName: data.body.userName
+        };
+
+    } catch (error) {
+        throw error;
+    }
+};

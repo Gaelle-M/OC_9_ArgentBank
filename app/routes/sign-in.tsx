@@ -31,7 +31,9 @@ export default function SignIn() {
             const profileData = await getUserProfile(token);
             const fullName = `${profileData.firstName} ${profileData.lastName}`;
             dispatch(setProfile({
-                userName: fullName
+                userName: fullName,
+                firstName: profileData.firstName,
+                lastName: profileData.lastName,
             }));
 
             navigate('/user', { replace: true });
