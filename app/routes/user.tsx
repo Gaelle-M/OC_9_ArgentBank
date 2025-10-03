@@ -1,12 +1,17 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+import type { RootState } from '../store/store';
 import { UserProfileHeader } from '../components/UserProfileHeader/UserProfileHeader'; 
 import { Account } from '../components/account/Account'; 
 
 
+
 export default function User() {
+  const userName = useSelector((state: RootState) => state.auth.user.userName);
+
   return (
     <main className="main bg-dark">
-      <UserProfileHeader userName="Tony Jarvis" />
+      <UserProfileHeader userName={userName} />
       <h2 className="sr-only">Accounts</h2>
       <Account
         title="Argent Bank Checking (x8349)"

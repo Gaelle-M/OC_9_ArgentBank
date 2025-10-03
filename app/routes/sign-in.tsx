@@ -1,13 +1,10 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
-
-import type {Route}
-from "./+types/sign-in";
+import type {Route} from "./+types/sign-in";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faUserCircle} from '@fortawesome/free-solid-svg-icons'
-
-import {login as apiLogin} from '../api/authService';
+import {login as apiLogin, getUserProfile } from '../api/authService';
 import {signInSuccess, setProfile} from '../store/authSlice';
 
 export function loader({} : Route.LoaderArgs) {
@@ -25,10 +22,17 @@ export default function SignIn() {
         e.preventDefault();
 
         try {
-            const userData = await apiLogin(email, password);
-            localStorage.setItem('userToken', userData.token);
+            const loginData = await apiLogin(email, password);
+            const token = loginData.token;
 
-            dispatch(signInSuccess({token: userData.token, userName: userData.userName}));
+            localStorage.setItem('userToken', token);
+            dispatch(signInSuccess({token}));
+
+            const profileData = await getUserProfile(token);
+            const fullName = `${profileData.firstName} ${profileData.lastName}`;
+            dispatch(setProfile({
+                userName: fullName
+            }));
 
             navigate('/user', { replace: true });
 

@@ -25,7 +25,6 @@ export const login = async (email : string, password : string) => {
         if (data.body && data.body.token) {
             return {
                 token: data.body.token,
-                userName: data.body.userName || 'Utilisateur',
             };
         } else {
             throw new Error('Token manquant dans la réponse de l’API.');
@@ -41,7 +40,7 @@ export const getUserProfile = async (token: string) => {
 
     try {
         const response = await fetch(url, {
-            method: 'POST', 
+            method: 'GET', 
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
