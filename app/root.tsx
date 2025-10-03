@@ -30,6 +30,7 @@ export const links: Route.LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
+    <Provider store={store}> 
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
@@ -45,14 +46,13 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Scripts />
       </body>
     </html>
+     </Provider>
   );
 }
 
 export default function App() {
   return (
-    <Provider store={store}>
       <Outlet />
-    </Provider>
   );
 }
 

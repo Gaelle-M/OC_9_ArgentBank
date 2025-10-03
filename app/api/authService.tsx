@@ -35,3 +35,31 @@ export const login = async (email : string, password : string) => {
         throw error;
     }
 };
+
+export const getUserProfile = async (token: string) => {
+    const url = `${API_BASE_URL}/user/profile`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error("Erreur lors de la récupération du profil.");
+        }
+
+        const data = await response.json();
+        
+        return {
+            firstName: data.body.firstName, 
+            lastName: data.body.lastName,
+        };
+
+    } catch (error) {
+        throw error;
+    }
+};

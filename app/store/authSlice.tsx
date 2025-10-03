@@ -1,7 +1,20 @@
-// src/store/authSlice.ts
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice} from '@reduxjs/toolkit';
+import type { PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+interface UserProfilPayload {
+    userName: string;
+}
+
+interface AuthState {
+    isAuthenticated: boolean;
+    token: string | null;
+    user: {
+        userName: string;
+    };
+    error: string | null;
+}
+
+const initialState: AuthState = {
   isAuthenticated: false,
   token: null,
   user: {
@@ -21,6 +34,10 @@ const authSlice = createSlice({
       state.user.userName = action.payload.userName; 
       state.error = null;
     },
+    // Reducer mise à jour profil
+    setProfile: (state, action: PayloadAction<UserProfilPayload>) => {
+        state.user.userName = action.payload.userName;
+    },
     // Reducer pour la DÉCONNEXION
     signOut: (state) => {
   
@@ -33,6 +50,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { signInSuccess, signOut, updateUserName } = authSlice.actions;
-
+export const { signInSuccess, setProfile, signOut } = authSlice.actions; 
 export default authSlice.reducer;
