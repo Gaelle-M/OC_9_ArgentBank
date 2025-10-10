@@ -54,6 +54,7 @@ export const getUserProfile = async (token: string) => {
         const data = await response.json();
         
         return {
+            userName: data.body.userName,
             firstName: data.body.firstName, 
             lastName: data.body.lastName,
         };

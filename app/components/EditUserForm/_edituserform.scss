@@ -1,0 +1,32 @@
+.edit-user-form {
+    background: #fff;
+    width: 50%;
+    margin: 50px 0 20px;
+    padding: 30px 0;
+
+    .input-group {
+        padding: 10px 0;
+
+        input {
+            border: 1px solid #cfcfcf;
+            border-radius: 5px;
+            height: 30px;
+            margin-left: 10px;
+        }
+        input:disabled {
+            background: rgba(207, 207, 207,.4);
+            color: gray;
+        }
+
+    }
+    button {
+        border-color: #00bc77;
+        background-color: #00bc77;
+        color: #fff;
+        width: 20%;
+        font-size: 18px;
+        padding: 10px;
+        margin: 20px 5px;
+        border-radius: 5px;
+    }
+}

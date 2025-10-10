@@ -30,7 +30,7 @@ export const EditUserForm: React.FC<EditUserFormProps> = ({ onCancel }) => {
                 setFirstName(profileData.firstName);
                 setLastName(profileData.lastName);
           
-                setNewUserName(`${profileData.firstName} ${profileData.lastName}`); 
+                setNewUserName(profileData.userName); 
                 
             } catch (error) {
                 console.error("Erreur lors du chargement des données de profil:", error);
